@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Blog Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #3498db;
+        }
+
+        .blog-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .blog {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .blog:hover {
+            transform: scale(1.05);
+        }
+
+        h2 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .blog img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .blog img:hover {
+            transform: scale(1.1);
+        }
+
+        .read-more-link {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .read-more-link:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to Our Stylish Blog Page</h1>
+
+    <div class="blog-container">
+        <!-- Blog 1 -->
+        <div class="blog">
+            <img src="https://www.mudrika.com/img/cms/Blogs/WHAT%20ARE%20THE%204CS%20OF%20DIAMONDS-2.png" alt="Blog Image 1">
+            <h2>The 4C's</h2>
+            <p>The 4C's of diamonds—Carat, Cut, Color, and Clarity—serve as a universal grading system, collectively defining a diamond's size, brilliance, color quality, and internal purity, guiding buyers in making informed and personalized choices.</p>
+            <a href="{{ url_for('blog1') }}" class="read-more-link">Read More</a>
+        </div>
+
+        <!-- Blog 2 -->
+        <div class="blog">
+            <img src="https://luxurydiamonds.ca/cdn/shop/articles/diamond-shape-411064.jpg?v=1682104840" alt="Blog Image 2">
+            <h2>Types of Diamond Cuts</h2>
+            <p>Explore the various shapes and cuts of diamonds, explaining the difference between princess, round, emerald, and more.</p>
+            <a href="{{ url_for('blog2') }}" class="read-more-link">Read More</a>
+        </div>
+
+        <!-- Blog 3 -->
+        <div class="blog">
+            <img src="https://qph.cf2.quoracdn.net/main-qimg-bf8807540c26ffb70c35d8d892895513" alt="Blog Image 3">
+            <h2>Famous Diamonds Throughout History</h2>
+            <p>Delve into the stories behind some of the world's most famous diamonds, such as the Hope Diamond and the Cullinan Diamond.</p>
+            <a href="{{ url_for('blog3') }}" class="read-more-link">Read More</a>
+        </div>
+        
+        <!-- Blog 4 -->
+        <div class="blog">
+            <img src="https://www.diamondregistry.com/img/Unveiling-the-Subterranean-Treasures-De-Beers-Mines-First-Diamonds-From-Venetia-Underground.jpeg" alt="Blog Image 4">
+            <h2> Ethical Sourcing in the Diamond Industry</h2>
+            <p>Discuss the importance of ethical practices in diamond mining and explore options for ethically sourced diamonds.</p>
+            <a href="{{ url_for('blog4') }}" class="read-more-link">Read More</a>
+        </div>
+        
+        <!-- Blog 5 -->
+        <div class="blog">
+            <img src="https://www.viraasi.com/cdn/shop/articles/Top-6-American-Diamond-Jewellery-Trends-for-This-Wedding-Season-Viraasi.jpg?v=1655465026" alt="Blog Image 5">
+            <h2>Diamond Jewelry Trends</h2>
+            <p>Highlight the latest trends in diamond jewelry, including unique designs, settings, and metal choices.</p>
+            <a href="{{ url_for('blog5') }}" class="read-more-link">Read More</a>
+        </div>
+
+        <!-- Blog 6 -->
+        <div class="blog">
+            <img src="https://cdn.shopify.com/s/files/1/0527/7669/8040/files/Diamond_Alternatives.webp?v=1697892640" alt="Blog Image 6">
+            <h2>Diamond Alternatives and Simulants</h2>
+            <p>Inform readers about alternative stones and diamond simulants, such as moissanite and cubic zirconia.</p>
+            <a href="{{ url_for('blog6') }}" class="read-more-link">Read More</a>
+        </div>
+        
+        <!-- Blog 7 -->
+        <div class="blog">
+            <img src="https://campuspress-test.yale.edu/tribune/files/2018/11/Synthetic-diamond-e1424882357420.jpg" alt="Blog Image 7">
+            <h2>The Science of Diamonds</h2>
+            <p>Explore the geological and physical properties of diamonds, detailing how they are formed and why they sparkle.</p>
+            <a href="{{ url_for('blog7') }}" class="read-more-link">Read More</a>
+        </div>
+        
+        <!-- Blog 8 -->
+        <div class="blog">
+            <img src="https://pvdvintagejewelry.com/cdn/shop/products/a6c22c33-5a8d-d409-5eb5-7d8b7db96a73.jpg?v=1687528618&width=1946" alt="Blog Image 8" style='height: 200px;width: 300px'>
+            <h2>Vintage and Antique Diamond Jewelry</h2>
+            <p>Showcase the allure of vintage and antique diamond jewelry, explaining the historical significance and popular styles.</p>
+            <a href="{{ url_for('blog8') }}" class="read-more-link">Read More</a>
+        </div>
+        
+        <!-- Blog 9 -->
+        <div class="blog">
+            <img src="https://businesspost.ng/wp-content/uploads/2023/06/invest-in-diamond-jewelry.jpg" alt="Blog Image 9">
+            <h2>Investing in Diamonds</h2>
+            <p>Discuss the potential benefits and considerations of investing in diamonds, covering factors like rarity and market trends.</p>
+            <a href="{{ url_for('blog9') }}" class="read-more-link">Read More</a>
+        </div>
+        
+        <div class='blog'>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROlxgYGymfs8G1LArhnWpd7omW5uaLkKhCGA&usqp=CAU" style='height: 300px; padding-top: 50px;'>
+        </div>
+        <!-- Blog 10 -->
+        <div class="blog">
+            <img src="https://4cs.gia.edu/wp-content/uploads/2016/09/NewHero_CaringforyourDiamond_1920x1080-01.jpg" alt="Blog Image 10">
+            <h2>Diamond Care and Maintenance</h2>
+            <p>Provide practical tips for caring and maintaining diamond jewelry to ensure longevity and brilliance.</p>
+            <a href="{{ url_for('blog10') }}" class="read-more-link">Read More</a>
+        </div>
+        
+        <div class='blog'>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROlxgYGymfs8G1LArhnWpd7omW5uaLkKhCGA&usqp=CAU" style='height: 300px; padding-top: 50px;'>
+        </div>
+        
+       
+        
+       
+        
+        
+    </div>
+    <a href="{{ url_for('home_page') }}">Back to Home</a>
+</body>
+
+</html>
