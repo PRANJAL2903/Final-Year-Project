@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Catalog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    #filter {
+      width: 20%;
+      padding: 20px;
+      background-color: #f1f1f1;
+    }
+
+    /* Style for filters */
+    .filter-label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .filter-input {
+      margin-bottom: 10px;
+    }
+
+    #products {
+      width: 75%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+
+    .catalog {
+      width: 75%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .item {
+      position: relative;
+      border: 1px solid #ddd;
+      padding: 15px;
+      box-sizing: border-box;
+      display: block;
+    }
+
+    .video {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      outline: none;
+      display: none;
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+     display:none;
+      
+    }
+
+    .item-details {
+      text-align: center;
+    }
+
+    .price {
+      margin-top: 10px;
+    }
+
+    .size {
+      margin-top: 10px;
+    }
+
+    .buy-button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Responsive layout adjustments */
+    @media (max-width: 768px) {
+      #filter {
+        width: 100%;
+      }
+
+      #products {
+        width: 100%;
+      }
+
+      .catalog {
+        width: 100%;
+      }
+
+      .filter-input {
+        display: block;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="filter">
+    <div>
+      <label class="filter-label">Price Filter:</label>
+      <div class="filter-input">
+        <input type="checkbox" id="priceAll" name="price" value="all" onchange="applyFilters()">
+        <label for="priceAll">All</label>
+      </div>
+      <div class="filter-input">
+        <input type="checkbox" id="price0-50" name="price" value="0-50" onchange="applyFilters()">
+        <label for="price0-50">$0 - $50</label>
+      </div>
+      <div class="filter-input">
+        <input type="checkbox" id="price51-100" name="price" value="51-100" onchange="applyFilters()">
+        <label for="price51-100">$51 - $100</label>
+      </div>
+      <div class="filter-input">
+        <input type="checkbox" id="price101-200" name="price" value="101-200" onchange="applyFilters()">
+        <label for="price101-200">$101 - $200</label>
+      </div>
+    </div>
+    <div>
+      <label class="filter-label">Ring Size Filter:</label>
+      <div class="filter-input">
+        <input type="checkbox" id="ringSizeAll" name="size" value="all" onchange="applyFilters()">
+        <label for="ringSizeAll">All</label>
+      </div>
+      <div class="filter-input">
+        <input type="checkbox" id="ringSize5" name="size" value="5" onchange="applyFilters()">
+        <label for="ringSize5">Ring Size 5</label>
+      </div>
+      <div class="filter-input">
+        <input type="checkbox" id="ringSize10" name="size" value="10" onchange="applyFilters()">
+        <label for="ringSize10">Ring Size 10</label>
+      </div>
+      <div class="filter-input">
+        <input type="checkbox" id="ringSize15" name="size" value="15" onchange="applyFilters()">
+        <label for="ringSize15">Ring Size 15</label>
+      </div>
+      <!-- Add more ring size options as needed -->
+    </div>
+  </div>
+
+  <div class="catalog">
+    <!-- Display images and videos within the same container -->
+       <div class="item" data-price="10" data-size="8">
+      <div class="media-container">
+        <img class="media image" src="https://kinclimg1.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BIVS0001P18_YAA18DIG6XXXXXXXX_ABCD00-PICS-00004-1024-12990.png" alt="Item 1" style='height: 300px; width: 300px;'>
+        <video class="media video" src="https://kinvid0.bluestone.com/output/mp4/BIVS0001P18-VIDEO-6916.mp4/BIVS0001P18-VIDEO-6916.mp4" type="video/mp4" style='height: 300px; width: 300px;' autoplay></video>
+      </div>
+      <div class="play-button">&#9654;</div>
+      <div class="item-details">
+        <div class="price">$10</div>
+        <div class="size">Size: 8</div>
+        <button class="buy-button" onclick="redirectToBuyPage(this)">Buy Now</button>
+      </div>
+    </div>
+      
+      
+        <div class="item" data-price="10" data-size="8">
+      <div class="media-container">
+        <img class="media image" src="https://kinclimg6.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BIRS0006P36_YAA18DIG6XXXXXXXX_ABCD00-PICS-00004-1024-1837.jpg" alt="Item 1" style='height: 300px; width: 300px;'>
+        <video class="media video" src="https://kinvid0.bluestone.com/output/mp4/BIRS0006P36-VIDEO-4360.mp4/BIRS0006P36-VIDEO-4360.mp4" type="video/mp4" style='height: 300px; width: 300px;' autoplay></video>
+      </div>
+      <div class="play-button">&#9654;</div>
+      <div class="item-details">
+        <div class="price">$10</div>
+        <div class="size">Size: 8</div>
+        <button class="buy-button" onclick="redirectToBuyPage(this)">Buy Now</button>
+      </div>
+    </div>
+      
+      
+        <div class="item" data-price="10" data-size="8">
+      <div class="media-container">
+        <img class="media image" src="https://kinclimg9.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BIPO0783P18_YAA18DIG6XXXXXXXX_ABCD00-PICS-00004-1024-56757.png" alt="Item 1" style='height: 300px; width: 300px;'>
+        <video class="media video" src="https://kinvid0.bluestone.com/output/mp4/BIPO0783P18-VIDEO-56846.mp4/BIPO0783P18-VIDEO-56846.mp4" type="video/mp4" style='height: 300px; width: 300px;' autoplay></video>
+      </div>
+      <div class="play-button">&#9654;</div>
+      <div class="item-details">
+        <div class="price">$10</div>
+        <div class="size">Size: 8</div>
+        <button class="buy-button" onclick="redirectToBuyPage(this)">Buy Now</button>
+      </div>
+    </div>
+      
+      
+        <div class="item" data-price="10" data-size="8">
+      <div class="media-container">
+        <img class="media image" src="https://kinclimg3.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BIRS0006P31_YAA18DIG6XXXXXXXX_ABCD00-PICS-00004-1024-34378.png" alt="Item 1" style='height: 300px; width: 300px;'>
+        <video class="media video" src="https://kinvid1.bluestone.com/output/mp4/BIRS0006P31-VIDEO-25501.mp4/BIRS0006P31-VIDEO-25501.mp4" type="video/mp4" style='height: 300px; width: 300px;' autoplay></video>
+      </div>
+      <div class="play-button">&#9654;</div>
+      <div class="item-details">
+        <div class="price">$10</div>
+        <div class="size">Size: 8</div>
+        <button class="buy-button" onclick="redirectToBuyPage(this)">Buy Now</button>
+      </div>
+    </div>
+      
+      
+        <div class="item" data-price="10" data-size="8">
+      <div class="media-container">
+        <img class="media image" src="https://kinclimg0.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BV-P08_YAA18DIG6XXXXXXXX_ABCD00-PICS-00004-1024-5585.png" alt="Item 1" style='height: 300px; width: 300px;'>
+        <video class="media video" src="https://kinvid1.bluestone.com/output/mp4/BV-P08-VIDEO-7014.mp4/BV-P08-VIDEO-7014.mp4" type="video/mp4" style='height: 300px; width: 300px;' autoplay></video>
+      </div>
+      <div class="play-button">&#9654;</div>
+      <div class="item-details">
+        <div class="price">$10</div>
+        <div class="size">Size: 8</div>
+        <button class="buy-button" onclick="redirectToBuyPage(this)">Buy Now</button>
+      </div>
+    </div>
+      
+      
+        <div class="item" data-price="10" data-size="8">
+      <div class="media-container">
+        <img class="media image" src="https://kinclimg7.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BIPM0001P19_YAA18DIG6XXXXXXXX_ABCD00-PICS-00004-1024-42204.png" alt="Item 1" style='height: 300px; width: 300px;'>
+        <video class="media video" src="https://kinvid1.bluestone.com/output/mp4/BIPM0001P19-VIDEO-2981.mp4/BIPM0001P19-VIDEO-2981.mp4" type="video/mp4" style='height: 300px; width: 300px;' autoplay></video>
+      </div>
+      <div class="play-button">&#9654;</div>
+      <div class="item-details">
+        <div class="price">$10</div>
+        <div class="size">Size: 8</div>
+        <button class="buy-button" onclick="redirectToBuyPage(this)">Buy Now</button>
+      </div>
+    </div>
+      
+    
+        <div class="item" data-price="10" data-size="8">
+      <div class="media-container">
+        <img class="media image" src="https://kinclimg3.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BIID0509P14_YAA18DIG6XXXXXXXX_ABCD00-PICS-00004-1024-34344.png" alt="Item 1" style='height: 300px; width: 300px;'>
+        <video class="media video" src="https://kinvid1.bluestone.com/output/mp4/BIID0509P14-VIDEO-34429.mp4/BIID0509P14-VIDEO-34429.mp4" type="video/mp4" style='height: 300px; width: 300px;' autoplay></video>
+      </div>
+      <div class="play-button">&#9654;</div>
+      <div class="item-details">
+        <div class="price">$10</div>
+        <div class="size">Size: 8</div>
+        <button class="buy-button" onclick="redirectToBuyPage(this)">Buy Now</button>
+      </div>
+    </div>
+      
+    
+        <div class="item" data-price="10" data-size="8">
+      <div class="media-container">
+        <img class="media image" src="https://kinclimg5.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BISI0001P18_YAA18DIG6XXXXXXXX_ABCD00-PICS-00004-1024-22194.png" alt="Item 1" style='height: 300px; width: 300px;'>
+        <video class="media video" src="https://kinvid0.bluestone.com/output/mp4/BISI0001P18-VIDEO-22225.mp4/BISI0001P18-VIDEO-22225.mp4" type="video/mp4" style='height: 300px; width: 300px;' autoplay></video>
+      </div>
+      <div class="play-button">&#9654;</div>
+      <div class="item-details">
+        <div class="price">$10</div>
+        <div class="size">Size: 8</div>
+        <button class="buy-button" onclick="redirectToBuyPage(this)">Buy Now</button>
+      </div>
+    </div>
+      
+      
+        <div class="item" data-price="10" data-size="8">
+      <div class="media-container">
+        <img class="media image" src="https://kinclimg7.bluestone.com/f_webp,c_scale,w_1024,b_rgb:f0f0f0/giproduct/BIPM0002P16_YAA18DIG6XXXXXXXX_ABCD00-PICS-00004-1024-38377.png" alt="Item 1" style='height: 300px; width: 300px;'>
+        <video class="media video" src="https://kinvid1.bluestone.com/output/mp4/BIPM0002P16-VIDEO-4671.mp4/BIPM0002P16-VIDEO-4671.mp4" type="video/mp4" style='height: 300px; width: 300px;' autoplay></video>
+      </div>
+      <div class="play-button">&#9654;</div>
+      <div class="item-details">
+        <div class="price">$10</div>
+        <div class="size">Size: 8</div>
+        <button class="buy-button" onclick="redirectToBuyPage(this)">Buy Now</button>
+      </div>
+    </div>
+      
+      
+
+      
+      
+      
+
+      
+      
+
+
+
+    
+        
+
+  
+    
+  </div>
+<a href="/linked_page_3" style="padding-left: 1325px;">Back to First Page</a><br><br>
+<a href="{{ url_for('home_page') }}" style="padding-left: 1325px;">Back to Home</a>
+  <script>
+    function applyFilters() {
+      var priceFilter = document.querySelector('#filter input[name="price"]:checked');
+      var sizeFilter = document.querySelector('#filter input[name="size"]:checked');
+
+      var items = document.querySelectorAll('.item');
+
+      items.forEach(function (item) {
+        var itemPrice = parseInt(item.getAttribute('data-price'));
+        var itemSize = parseInt(item.getAttribute('data-size'));
+
+        var priceMatch = !priceFilter || (itemPrice >= getPriceMin(priceFilter) && itemPrice <= getPriceMax(priceFilter));
+        var sizeMatch = !sizeFilter || itemSize === parseInt(sizeFilter.value);
+
+        if (priceMatch && sizeMatch) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function getPriceMin(priceFilter) {
+      return priceFilter ? parseInt(priceFilter.value.split('-')[0]) : 0;
+    }
+
+    function getPriceMax(priceFilter) {
+      return priceFilter ? parseInt(priceFilter.value.split('-')[1]) : Infinity;
+    }
+
+     document.addEventListener('DOMContentLoaded', function () {
+    var items = document.querySelectorAll('.item');
+
+    items.forEach(function (item) {
+      var image = item.querySelector('.image');
+      var video = item.querySelector('.video');
+      video.muted = true; // Mute to comply with browser policies
+
+      function startVideo() {
+        image.style.display = 'none';
+        video.style.display = 'block';
+        video.play().catch(error => {
+          // Autoplay was prevented. Mute the video and play.
+          video.muted = true;
+          video.play();
+        });
+      }
+
+      function stopVideo() {
+        video.pause();
+        image.style.display = 'block';
+        video.style.display = 'none';
+      }
+
+      // Start the video when the cursor is over the image
+      item.addEventListener('mouseenter', startVideo);
+
+      // Pause the video when the cursor leaves
+      item.addEventListener('mouseleave', stopVideo);
+
+      // Pause the video after 15 seconds
+      video.addEventListener('play', function () {
+        setTimeout(function () {
+          stopVideo();
+        }, 15000);
+      });
+    });
+  });
+  function redirectToBuyPage(button) {
+    var itemDetails = button.closest('.item-details');
+    var price = itemDetails.querySelector('.price').textContent;
+    price = price.replace('$', ''); // Remove the dollar sign
+    // Construct the URL using Flask's url_for function
+    var buyUrl = "{{ url_for('buy') }}" + "?price=" + price;
+    
+    // Redirect to the constructed URL
+    window.location.href = buyUrl;
+  }
+</script>
+
+
+</body>
+</html>
+
+</body>
+</html>
