@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Diamond Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .result-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .result-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .suggest-button,
+        .feedback-button {
+            display: inline-block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Initially hide the dropdown */
+        #firstDropdownContainer,
+        #secondDropdownContainer {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="result-container">
+        <div class="result-header">
+            <h1>Diamond Prediction Result</h1>
+        </div>
+        <div class="result-value">
+            Predicted Price: {{ final_result }}
+        </div>
+        <div class="back-link">
+            <a href="{{ url_for('home_page') }}">Back to Home</a>
+        </div>
+        <div class="button-container">
+            <div class="suggest-button">
+                <button onclick="suggestFunction()">Suggest</button>
+            </div>
+
+            <div class="feedback-button">
+                <button onclick="showFeedback()">Feedback</button>
+            </div>
+        </div>
+
+        <!-- Container for the first dropdown -->
+        <div id="firstDropdownContainer">
+            <form>
+                <label for="firstDropdown">Select Category:</label>
+                <select id="firstDropdown" onchange="populateSecondDropdown()">
+                    <option value="">Select...</option>
+                    <option value="Rings">Rings</option>
+                    <option value="Pendants">Pendants</option>
+                    <option value="Nosepins">Nosepins</option>
+                    <option value="Necklaces">Necklaces</option>
+                    <option value="Mangalsutras">Mangalsutras</option>
+                    <option value="Earrings">Earrings</option>
+                    <option value="Bracelets">Bracelets</option>
+                    <option value="Bangles">Bangles</option>
+                    <!-- Add more categories as needed -->
+                </select>
+
+                <br>
+
+                <!-- Container for the second dropdown -->
+                <div id="secondDropdownContainer">
+                    <label for="secondDropdown">Select Item:</label>
+                    <select id="secondDropdown" onchange="openLinkedPage()">
+                        <option value="">Select...</option>
+                        <!-- Options for the second dropdown will be populated dynamically -->
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="video-container">
+        <video autoplay muted loop>
+            <source src="../static/images/AdobeStock_193057378_Video_HD_Preview (online-video-cutter.com).mp4"
+                type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <script>
+        function suggestFunction() {
+            // Show the first dropdown after clicking the "Suggest" button
+            document.getElementById("firstDropdownContainer").style.display = "block";
+        }
+
+        function populateSecondDropdown() {
+            var firstDropdown = document.getElementById("firstDropdown");
+            var secondDropdownContainer = document.getElementById("secondDropdownContainer");
+
+            // Check the selected option from the first dropdown
+            var selectedCategory = firstDropdown.value;
+
+            // If a category is selected, show the second dropdown
+            if (selectedCategory) {
+                secondDropdownContainer.style.display = "block";
+            } else {
+                // If no category is selected, hide the second dropdown
+                secondDropdownContainer.style.display = "none";
+            }
+
+            // Clear previous options
+            var secondDropdown = document.getElementById("secondDropdown");
+            secondDropdown.innerHTML = '<option value="">Select...</option>';
+
+            // Populate options for the second dropdown based on the selected category
+            var options;
+            if (selectedCategory === "Rings") {
+                options = ["Diamond+RoseGold", "Diamond+Gold"];
+            } else if (selectedCategory === "Pendants") {
+                options = ["Diamond+RoseGold", "Diamond+Gold"];
+            } else if(selectedCategory==="Nosepins"){
+                options=["Diamond+Gold"];
+            }else if(selectedCategory==="Necklaces"){
+                options=["Diamond+Gold","Diamond+RoseGold"];
+            }else if(selectedCategory==="Mangalsutras"){
+                options=['Diamond+Gold'];
+            }else if(selectedCategory==="Earrings"){
+                options=["Diamond+Gold","Diamond+RoseGold"];
+            }else if(selectedCategory==="Bracelets"){
+                options=["Diamond+Gold"];
+            }else if(selectedCategory==="Bangles"){
+                options=['Diamond+Gold'];
+            }
+            // Add more conditions as needed for additional categories
+
+            // Populate the second dropdown with options
+            for (var i = 0; i < options.length; i++) {
+                var option = document.createElement("option");
+                option.text = options[i];
+                secondDropdown.add(option);
+            }
+        }
+
+        function openLinkedPage() {
+            var firstDropdown = document.getElementById("firstDropdown");
+            var secondDropdown = document.getElementById("secondDropdown");
+            var selectedCategory = firstDropdown.value;
+            var selectedOption = secondDropdown.value;
+
+            // Open the linked page in a new tab based on the selected category and option
+            if (selectedCategory == "Rings") {
+                if (selectedOption == "Diamond+RoseGold") {
+                    window.open("/linked_page_2", "_blank");
+                } else if (selectedOption == "Diamond+Gold") {
+                    window.open("/linked_page_1", "_blank");
+                }
+                // Add more conditions as needed for additional options in category1
+            } else if (selectedCategory === "Pendants") {
+                if (selectedOption === "Diamond+Gold") {
+                    window.open("/linked_page_3", "_blank");
+                } else if (selectedOption === "Diamond+RoseGold") {
+                    window.open("/linked_page_4", "_blank");
+                } 
+            }else if (selectedCategory === "Nosepins") {
+                if (selectedOption === "Diamond+Gold") {
+                    window.open("/linked_page_5", "_blank");
+                }
+            } else if (selectedCategory === "Necklaces") {
+                if (selectedOption === "Diamond+Gold") {
+                    window.open("/linked_page_6", "_blank");
+                } else if (selectedOption === "Diamond+RoseGold") {
+                    window.open("/linked_page_7", "_blank");
+                } 
+            }else if (selectedCategory === "Mangalsutras") {
+                if (selectedOption === "Diamond+Gold") {
+                    window.open("/linked_page_8", "_blank");
+                }
+            } else if (selectedCategory === "Earrings") {
+                if (selectedOption === "Diamond+Gold") {
+                    window.open("/linked_page_9", "_blank");
+                } else if (selectedOption === "Diamond+RoseGold") {
+                    window.open("/linked_page_10", "_blank");
+                } 
+            }else if (selectedCategory === "Bracelets") {
+                if (selectedOption === "Diamond+Gold") {
+                    window.open("/linked_page_11", "_blank");
+                }
+            }else if (selectedCategory === "Bangles") {
+                if (selectedOption === "Diamond+Gold") {
+                    window.open("/linked_page_12", "_blank");
+                }
+            }
+
+            
+            // Add more conditions as needed for additional categories
+        }
+
+        function showFeedback() {
+            // Replace this with your feedback functionality
+            window.location.href = "/feedback";
+
+        }
+    </script>
+</body>
+
+</html>
