@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy Page</title>
+<style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Product Name</h1>
+  <p id="price">Price: $0.00</p>
+  <button id="buyButton">Buy Now</button>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Retrieve price and image URL from query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const price = urlParams.get('price');
+        const imageUrl = urlParams.get('image');
+    
+        // Display price on the page
+        const priceElement = document.getElementById('price');
+        if (priceElement) {
+            priceElement.innerText = "Price: $" + price;
+        }
+    
+        // Display image on the page
+        const imageContainer = document.getElementById('image-container');
+        if (imageContainer && imageUrl) {
+            const image = document.createElement('img');
+            image.src = imageUrl;
+            image.alt = 'Product Image';
+            image.style.maxWidth = '100%'; // Adjust styling as needed
+            imageContainer.appendChild(image);
+        }
+    
+        // Add event listener to Buy Now button
+        const buyButton = document.querySelector('.buy-button');
+        if (buyButton) {
+            buyButton.addEventListener('click', function() {
+                // Extract image and video associated with the item
+                const item = this.closest('.item');
+                const imageSrc = item.querySelector('.media.image').src;
+    
+                // Redirect to the buy page with the image URL as a query parameter
+                const priceParam = encodeURIComponent(price);
+                const imageParam = encodeURIComponent(imageSrc);
+                const buyPageUrl = "{{ url_for('buy') }}";
+                const redirectUrl = `${buyPageUrl}?price=${priceParam}&image=${imageParam}`;
+                window.location.href = redirectUrl;
+            });
+        }
+    });
+    </script>
+    
+    
+</body>
+</html>
