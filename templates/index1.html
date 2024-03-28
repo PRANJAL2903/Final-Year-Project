@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diamond Mine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Century Gothic;
+        }
+        header {
+            background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('../static/images/login.png');
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            min-height: 100px;
+        }
+        .logo {
+            margin-left: -135px;
+        }
+        image {
+            padding-top: 50px;   
+        }
+        .para {
+            padding-top: 150px;
+            padding-bottom: 10px;
+            margin-right: 50px;
+            font-family: cursive;
+            font-size: 25px;
+            color: #fff;
+        }
+        ul {
+            float: right;
+            list-style-type: none;
+            margin-top: 20px;
+            margin-right: -180px;
+        }
+        ul li {
+            display: inline-block;
+        }
+        ul li a {
+            text-decoration: none;
+            color: #ff7200;
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            transition: 0.5s ease;
+        }
+        ul li a:hover {
+            background-color: #fff;
+            color: #000;
+        }
+        ul li.active a {
+            background-color: #fff;
+            color: #000;
+        }
+        .logo img {
+            float: left;
+            width: 150px;
+            height: auto;
+        }
+        .main {
+            max-width: 1200px;
+            margin: auto;
+        }
+        .title {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .title h1 {
+            color: #fff;
+            font-size: 85px;
+        }
+        .button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .btn {
+            border: 1px solid #fff;
+            padding: 5px 20px;
+            color: #fff;
+            transition: 0.6s ease;
+            font-size: 18px;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background-color: #fff;
+            color: #000;
+        }
+        .sub-menu {
+            display: none;
+            top: 6%;
+            position: relative;
+        }
+        .sub-menu ul {
+            position: absolute;
+        }
+        .main ul li:hover .sub-menu {
+            display: block;
+            position: absolute;
+            background-color: rgb(0,45,117);
+            margin-top: 12px;
+            margin-left: -8px;
+        }
+        .main ul li:hover .sub-menu ul {
+            display: block;
+            margin: 6px;
+        }
+        .main ul li:hover .sub-menu ul li {
+            width: 75px;
+            padding: 5px;
+            border-bottom: 1px #fff;
+            background: transparent;
+            transition: 0.4s ease;
+            text-align: left;
+            border-radius: 0;
+        }
+        .main ul li:hover .sub-menu ul li:last-child {
+            border-bottom: none;
+        }
+        .form {
+            width: 250px;
+            height: 400px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8)50%,rgba(0,0,0,0.8)50%);
+            position: relative;
+            top: -500px;
+            left: 1160px;
+            transform: translate(0%,-5%);
+            border-radius: 10px;
+            padding: 25px;
+        }
+        .form h2 {
+            width: 220px;
+            font-family: sans-serif;
+            text-align: center;
+            color: #ff7200;
+            font-size: 22px;
+            background-color: #fff;
+            border-radius: 10px;
+            margin: 2px;
+            padding: 8px;
+        }
+        .form input {
+            width: 240px;
+            height: 35px;
+            background: transparent;
+            border-bottom: 1px solid #ff7200;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            color: #ff7200;
+            font-size: 15px;
+            letter-spacing: 1px;
+            margin-top: 30px;
+            font-family: sans-serif;
+        }
+        .form input:focus {
+            outline: none;
+        }
+        ::placeholder {
+            color: #fff;
+            font-family: Arial;
+        }
+        .form label {
+            display: block;
+            padding-left: 115px;
+            text-indent: -115px;
+            color: #fff;
+            padding-top: 20px;
+        }
+        .form label input {
+            width: 15px;
+            height: 15px;
+            padding: 0;
+            margin: 0;
+            vertical-align: bottom;
+            position: relative;
+            top: -3px;
+        }
+        .btnn {
+            width: 240px;
+            height: 40px;
+            background: #ff7200;
+            border: none;
+            margin-top: 20px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #ff7200;
+            transition: 0.4s ease;
+        }
+        .btnn:hover {
+            background: #fff;
+            color: #fff;
+        }
+        .btnn a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding-top: 35px;
+        }
+        .form .link {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 17px;
+            padding-top: 25px;
+            text-align: center;
+            color: #fff;
+        }
+        .form .link a {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            text-decoration: none;
+            color: #ff7200;
+        }
+        .liw {
+            padding-top: 25px;
+            padding-bottom: 10px;
+            text-align: center;
+            color: #fff;
+        }
+        .icons a {
+            text-decoration: none;
+            color: #fff;
+        }
+        .icons ion-icon {
+            color: #fff;
+            font-size: 30px;
+            padding-left: 14px;
+            padding-top: 30px;
+            transition: 0.3s ease;
+        }
+        .icons ion-icon:hover {
+            color: #ff7200;
+        }
+        /* Slideshow container */
+        .slideshow-container {
+            max-width: 700px;
+            max-height: 900px;
+            position: relative;
+            margin: auto;
+            padding-top: 200px;
+        }
+        /* The dots/bullets/indicators */
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: none;
+            transition: background-color 0.6s ease;
+        }
+        .active {
+            background-color: #717171;
+        }
+        /* Fading animation */
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+        @keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+        /* On smaller screens, decrease text size */
+        @media only screen and (max-width: 300px) {
+            .text {font-size: 11px}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class='main'>
+            <div class='logo'>
+                <img src='../static/images/logo.png'>
+            </div>
+            <ul>
+                <li><a href="{{ url_for('home_page') }}">Home</a></li>
+                <li><a href="{{url_for('blogs')}}">About</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact us</a></li>
+                <li><a href="{{ url_for('login') }}">Log In/ SignUp</a></li>
+            </ul>
+        </div>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="../static/images/1.jpg" style="width:100% ; height: 350px;">
+            </div>
+            <div class="mySlides fade">
+                <img src="../static/images/2.jpg" style="width:100%; height: 350px;">
+            </div>
+            <div class="mySlides fade">
+                <img src="../static/images/3.jpg" style="width:100%; height: 350px;">
+            </div>
+            <div class="mySlides fade">
+                <img src="../static/images/4.jpg" style="width:100%; height: 350px;">
+            </div>
+        </div>
+        <br>
+        <div style="text-align:center">
+            <span class="dot"></span> 
+            <span class="dot"></span> 
+            <span class="dot"></span> 
+            <span class="dot"></span>
+        </div>
+        <script>
+            let slideIndex = 0;
+            showSlides();
+            function showSlides() {
+                let i;
+                let slides = document.getElementsByClassName("mySlides");
+                let dots = document.getElementsByClassName("dot");
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";  
+                }
+                slideIndex++;
+                if (slideIndex > slides.length) {slideIndex = 1}    
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex-1].style.display = "block";  
+                dots[slideIndex-1].className += " active";
+                setTimeout(showSlides, 2000); // Change image every 2 seconds
+            }
+        </script>
+        
+    </header>
+    <button class="btnn" style="position: fixed; right: 650px; bottom: 20px;"><a href="{{ url_for('index') }}">Go to Prediction</a></button>
+</body>
+</html>
